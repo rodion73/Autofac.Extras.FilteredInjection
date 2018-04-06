@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.5</TargetFramework>
+    <Authors>Rodion Novoselov</Authors>
+    <Company />
+    <Description>A couple of very simple generic Autofac modules that allows to set up dependency injections basing on arbitrary conditions.</Description>
+    <PackageProjectUrl>https://github.com/rodion73/Autofac.Extras.FilteredInjection</PackageProjectUrl>
+    <PackageTags>Autofac</PackageTags>
+    <PackageLicenseUrl>https://github.com/rodion73/Autofac.Extras.FilteredInjection/blob/master/LICENSE</PackageLicenseUrl>
+    <Copyright>Copyright (c) 2018 Rodion Novoselov</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
