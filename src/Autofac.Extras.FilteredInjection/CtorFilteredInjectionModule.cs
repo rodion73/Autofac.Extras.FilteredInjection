@@ -5,6 +5,10 @@ using System.Reflection;
 
 namespace Autofac.Extras.FilteredInjection
 {
+    /// <summary>
+    /// Autofac module to inject constructor parameters basing on condition.
+    /// </summary>
+    /// <seealso cref="Autofac.Module"/>
     public class CtorFilteredInjectionModule : Module
     {
         #region Private Fields
@@ -16,6 +20,18 @@ namespace Autofac.Extras.FilteredInjection
 
         #region Public Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see
+        /// cref="PropertyFilteredInjectionModule"/> class.
+        /// </summary>
+        /// <param name="filter">
+        /// The constructor parameter filter. When returns true the constructor
+        /// parameter will be injected with specified factory.
+        /// </param>
+        /// <param name="factory">The factory to create injected service.</param>
+        /// <exception cref="ArgumentNullException">
+        /// filter or factory is null
+        /// </exception>
         public CtorFilteredInjectionModule(Func<ParameterInfo, bool> filter, Func<ParameterInfo, IComponentContext, object> factory)
         {
             _filter = filter ?? throw new ArgumentNullException(nameof(filter));
@@ -26,6 +42,17 @@ namespace Autofac.Extras.FilteredInjection
 
         #region Protected Methods
 
+        /// <summary>
+        /// Override to attach module-specific functionality to a component registration.
+        /// </summary>
+        /// <param name="componentRegistry">The component registry.</param>
+        /// <param name="registration">
+        /// The registration to attach functionality to.
+        /// </param>
+        /// <remarks>
+        /// This method will be called for all existing <i>and future</i>
+        /// component registrations - ordering is not important.
+        /// </remarks>
         protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)
         {
             registration.Preparing += OnComponentPreparing;
@@ -48,11 +75,28 @@ namespace Autofac.Extras.FilteredInjection
         #endregion Private Methods
     }
 
+    /// <summary>
+    /// Autofac module to inject constructor parameters basing on condition.
+    /// </summary>
+    /// <typeparam name="T">The type of service to inject.</typeparam>
+    /// <seealso cref="Autofac.Module"/>
     public class CtorFilteredInjectionModule<T> : CtorFilteredInjectionModule
         where T : class
     {
         #region Public Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see
+        /// cref="PropertyFilteredInjectionModule{T}"/> class.
+        /// </summary>
+        /// <param name="filter">
+        /// The constructor parameter filter. When returns true the constructor
+        /// parameter will be injected with specified factory.
+        /// </param>
+        /// <param name="factory">The factory to create injected service.</param>
+        /// <exception cref="ArgumentNullException">
+        /// filter or factory is null
+        /// </exception>
         public CtorFilteredInjectionModule(Func<ParameterInfo, bool> filter, Func<ParameterInfo, IComponentContext, T> factory) :
             base(pi => pi.ParameterType == typeof(T) && filter(pi), factory)
         {
