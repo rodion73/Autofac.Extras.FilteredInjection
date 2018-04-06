@@ -1,4 +1,3 @@
-
 # Autofac.Extras.FilteredInjection
 
 A couple of very simple generic Autofac modules that allows to set up dependency injections basing on arbitrary conditions.
@@ -7,7 +6,7 @@ A couple of very simple generic Autofac modules that allows to set up dependency
 
 Set up injection of different implementation of the same service for different target components (constructor injection):
 
-```
+```csharp
 public interface IFoo
 {
 }
@@ -64,7 +63,7 @@ using(var container = builder.Build())
 
 Set up injection of different implementation of the same service for different target components (property injection):
 
-```
+```csharp
 public interface IFoo
 {
 }
