@@ -124,6 +124,6 @@ using(var container = builder.Build())
 }
 ```
 
-As the first parameters of constrators get either Func<ParameterInfo, bool> and Func<PropertyInfo, bool>, any conditions of injection can be passed, like by assemblies, namespaces, etc.
+As the first parameters of constructors get either Func<ParameterInfo, bool> or Func<PropertyInfo, bool>, any conditions of injection can be passed, like by assemblies, by namespaces, etc.
 
-The code is inspired by the sample of the Log4net / Autofac integration: http://autofaccn.readthedocs.io/en/latest/examples/log4net.html, since similar code is quite commonly used and I wanted to have some generic and flexible solution for this.
+The code is inspired by the sample of the Log4net / Autofac integration: http://autofaccn.readthedocs.io/en/latest/examples/log4net.html, since similar code is quite common and I wanted to have some generic and flexible solution for this.
