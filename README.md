@@ -2,6 +2,16 @@
 
 A couple of very simple generic Autofac modules that allows to set up dependency injections basing on arbitrary conditions.
 
+## Installation
+
+### Via Nuget
+
+> Install-Package Autofac.Extras.FilteredInjection -Version 1.0.0
+
+### Via .NET CLI
+
+> dotnet add package Autofac.Extras.FilteredInjection --version 1.0.0
+
 ## Sample usage
 
 Set up injection of different implementation of the same service for different target components (constructor injection):
@@ -114,3 +124,6 @@ using(var container = builder.Build())
 }
 ```
 
+As the first parameters of constructors get either Func<ParameterInfo, bool> or Func<PropertyInfo, bool>, any conditions of injection can be passed, like by assemblies, by namespaces, etc.
+
+The code is inspired by the sample of the Log4net / Autofac integration: http://autofaccn.readthedocs.io/en/latest/examples/log4net.html, since similar code is quite common and I wanted to have some generic and flexible solution for this.
