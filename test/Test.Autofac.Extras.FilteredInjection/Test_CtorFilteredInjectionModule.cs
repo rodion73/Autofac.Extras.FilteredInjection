@@ -6,6 +6,10 @@ using Xunit;
 
 namespace Autofac.Extras.FilteredInjection
 {
+    public interface IFoo
+    {
+    }
+
     public class Test_CtorFilteredInjectionModule
     {
         #region Public Methods
@@ -65,46 +69,85 @@ namespace Autofac.Extras.FilteredInjection
             }
         }
 
+        [Fact]
+        public void Injection_ByAssembly()
+        {
+            var builder = new ContainerBuilder();
+
+            var foo = new Foo();
+
+            builder.RegisterModule(new CtorFilteredInjectionModule<IFoo>(
+                pi => pi.Member.DeclaringType.Assembly == typeof(Foo).Assembly,
+                (pi, c) => foo
+            ));
+
+            builder.RegisterType<Bar>();
+
+            using (var container = builder.Build())
+            {
+                var bar = container.Resolve<Bar>();
+                bar.Foo.Should().BeSameAs(foo);
+            }
+        }
+
         #endregion Public Methods
+    }
 
-        #region Public Classes
+    public class Foo1
+    {
+        #region Public Constructors
 
-        public class Foo1
+        public Foo1(object p)
         {
-            #region Public Constructors
-
-            public Foo1(object p)
-            {
-                P = p;
-            }
-
-            #endregion Public Constructors
-
-            #region Public Properties
-
-            public object P { get; }
-
-            #endregion Public Properties
+            P = p;
         }
 
-        public class Foo2
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public object P { get; }
+
+        #endregion Public Properties
+    }
+
+    public class Foo2
+    {
+        #region Public Constructors
+
+        public Foo2(object p)
         {
-            #region Public Constructors
-
-            public Foo2(object p)
-            {
-                P = p;
-            }
-
-            #endregion Public Constructors
-
-            #region Public Properties
-
-            public object P { get; }
-
-            #endregion Public Properties
+            P = p;
         }
 
-        #endregion Public Classes
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public object P { get; }
+
+        #endregion Public Properties
+    }
+
+    public class Foo : IFoo
+    {
+    }
+
+    public class Bar
+    {
+        #region Public Constructors
+
+        public Bar(IFoo foo)
+        {
+            Foo = foo;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public IFoo Foo { get; }
+
+        #endregion Public Properties
     }
 }
