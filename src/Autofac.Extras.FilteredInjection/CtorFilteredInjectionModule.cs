@@ -22,7 +22,7 @@ namespace Autofac.Extras.FilteredInjection
 
         /// <summary>
         /// Initializes a new instance of the <see
-        /// cref="PropertyFilteredInjectionModule"/> class.
+        /// cref="CtorFilteredInjectionModule"/> class.
         /// </summary>
         /// <param name="filter">
         /// The constructor parameter filter. When returns true the constructor
@@ -87,7 +87,7 @@ namespace Autofac.Extras.FilteredInjection
 
         /// <summary>
         /// Initializes a new instance of the <see
-        /// cref="PropertyFilteredInjectionModule{T}"/> class.
+        /// cref="CtorFilteredInjectionModule{T}"/> class.
         /// </summary>
         /// <param name="filter">
         /// The constructor parameter filter. When returns true the constructor

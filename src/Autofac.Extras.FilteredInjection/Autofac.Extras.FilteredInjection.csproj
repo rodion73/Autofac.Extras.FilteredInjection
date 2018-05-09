@@ -1,15 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.5</TargetFramework>
+    <TargetFrameworks>netstandard1.5;netstandard1.1</TargetFrameworks>
     <Authors>Rodion Novoselov</Authors>
     <Company />
     <Description>A couple of very simple generic Autofac modules that allows to set up dependency injections basing on arbitrary conditions.</Description>
     <PackageProjectUrl>https://github.com/rodion73/Autofac.Extras.FilteredInjection</PackageProjectUrl>
     <PackageTags>Autofac</PackageTags>
     <PackageLicenseUrl>https://github.com/rodion73/Autofac.Extras.FilteredInjection/blob/master/LICENSE</PackageLicenseUrl>
-    <Copyright>Copyright (c) 2018 Rodion Novoselov</Copyright>
+    <Copyright>Copyright © 2018 Rodion Novoselov</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -17,7 +18,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.6.2" />
+    <PackageReference Include="Autofac" Version="4.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="PropertyFilteredInjectionModule.cs" Condition="'$(TargetFramework)'=='netstandard1.1'" />
+  </ItemGroup>
 </Project>
