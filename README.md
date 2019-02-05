@@ -53,7 +53,7 @@ builder.RegisterModule(new CtorFilteredInjecftionModule<IFoo>(
     (p, c) => c.ResolveNamed<IFoo>("Foo1")
 ));
 
-builder.RegisterModule(new CtorFilteredInjecftionModule<IFoo>(
+builder.RegisterModule(new CtorFilteredInjectionModule<IFoo>(
     p => p.Member.DeclaringType == typeof(Bar2),
     (p, c) => c.ResolveNamed<IFoo>("Foo2")
 ));
